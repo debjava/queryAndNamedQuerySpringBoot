@@ -18,8 +18,11 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 	@Query(name = "Employee.query2") // Name declared in @NamedQuery
 	List<Employee> getAllInDescendingOrderOfCity();
 	
+	List<Employee> findByName(@Param("name") String name); // Normal JPA Query
+	
 	// findByName has been declared as @NamedQuery(name = "User.findByName", ...)
-	List<Employee> findByName(@Param("name") String name); 
+	@Query(name = "User.findByName")
+	List<Employee> getExactName(@Param("name") String name); 
 	
 	// Normal query without the use of NamedQuery
 	@Query("SELECT e FROM Employee e WHERE e.name in :names")
